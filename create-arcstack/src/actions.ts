@@ -1,4 +1,4 @@
-import { Logger, Resolver, packageJsonScript } from "@h3ravel/shared";
+import { Logger, Resolver } from "@h3ravel/shared";
 import { copyFile, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 import path, { basename, join, relative } from "node:path";
@@ -126,7 +126,6 @@ export default class {
 
     delete pkg.packageManager;
     pkg.name = Str.slugify(this.appName ?? basename(this.location!).replace(".", ""), "-");
-    pkg.scripts = packageJsonScript;
     if (this.description) {
       pkg.description = this.description;
     }
@@ -135,7 +134,6 @@ export default class {
       writeFile(pkgPath, JSON.stringify(pkg, null, 2)),
       this.removeLockFile(),
       rm(join(this.location!, "pnpm-workspace.yaml"), { force: true }),
-      rm(join(this.location!, "README.md"), { force: true }),
       rm(join(this.location!, ".github"), { force: true, recursive: true }),
     ]);
   }
