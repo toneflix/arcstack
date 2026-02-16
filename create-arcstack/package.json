@@ -1,7 +1,7 @@
 {
   "name": "create-arcstack",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scaffold new H3.js or Express.js applications using Toneflix's arcstack templates and starter kits",
   "main": "build/index.js",
   "private": false,
@@ -41,6 +41,7 @@
     "bin/run.js"
   ],
   "dependencies": {
+    "tsdown": "^0.15.4",
     "@antfu/install-pkg": "1.1.0",
     "@h3ravel/collect.js": "^5.3.4",
     "@h3ravel/musket": "^0.10.1",
@@ -55,7 +56,6 @@
     "@changesets/cli": "^2.29.5",
     "eslint": "^9.32.0",
     "ts-node": "^10.9.2",
-    "tsdown": "^0.15.4",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
