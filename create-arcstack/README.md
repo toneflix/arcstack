@@ -1,5 +1,5 @@
 [![Create Arcstack][i1]][l1]
-[![Downloads][d1]][d1]
+[![Downloads][d1]][l1]
 
 # About Create Arcstack
 
