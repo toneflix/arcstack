@@ -1,16 +1,16 @@
-# ArcStack
+# Arcstack
 
 A framework-agnostic backend starter kit for modern TypeScript servers.
 
-ArcStack provides a structured foundation for building APIs with Express, H3, and future runtimes — without locking your application to a single framework.
+Arcstack provides a structured foundation for building APIs with Express, H3, and future runtimes — without locking your application to a single framework.
 
 It prioritizes architecture first, framework second.
 
 ---
 
-## Why ArcStack?
+## Why Arcstack?
 
-Most starter kits are tightly coupled to one framework. ArcStack is designed around clean architecture and transport-layer abstraction.
+Most starter kits are tightly coupled to one framework. Arcstack is designed around clean architecture and transport-layer abstraction.
 
 - Multi-framework support (Express, H3 — more coming)
 - Opinionated but not restrictive
@@ -81,7 +81,7 @@ New adapters can be added without affecting the application layer.
 
 ---
 
-ArcStack uses structured error classes and centralized error middleware.
+Arcstack uses structured error classes and centralized error middleware.
 
 Example:
 
