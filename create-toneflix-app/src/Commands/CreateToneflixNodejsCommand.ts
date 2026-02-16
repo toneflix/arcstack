@@ -8,6 +8,7 @@ import { Str } from "@h3ravel/support";
 import Actions from "src/actions";
 import ora from "ora";
 import { Logger } from "@h3ravel/shared";
+import { cleanDirectoryExcept, hoistDirectoryContents } from "src/utils";
 
 export class CreateToneflixNodejsCommand extends Command {
   protected signature = `create-toneflix-nodejs
@@ -99,7 +100,6 @@ export class CreateToneflixNodejsCommand extends Command {
      */
     const kit = templates.find((e) => e.alias === template)!;
 
-    // oxlint-disable-next-line no-unused-vars
     let { install, token, pre } = await inquirer
       .prompt([
         {
@@ -151,14 +151,18 @@ export class CreateToneflixNodejsCommand extends Command {
     const actions = new Actions(join(process.cwd(), location), appName, description);
     const spinner = ora(`Loading Template...`).start();
 
-    await actions.download(source, install, undefined, options.overwrite);
+    const result = await actions.download(source, install, token, options.overwrite);
+
+    if (result.dir && kit.alias) {
+      await cleanDirectoryExcept(result.dir, kit.alias);
+      await hoistDirectoryContents(result.dir, join(result.dir, kit.alias));
+    }
 
     spinner.info(Logger.parse([["Cleaning Up...", "green"]], "", false)).start();
     await actions.cleanup();
 
     spinner.info(Logger.parse([["Initializing Project...", "green"]], "", false)).start();
     await actions.copyExampleEnv();
-    await actions.createTsConfig();
 
     spinner.succeed(Logger.parse([["Project initialization complete!", "green"]], "", false));
 

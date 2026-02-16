@@ -7,3 +7,4 @@ bin/*
 !bin/logo.txt
 .DS_Store
 h3ravel
+toneflix-nodejs

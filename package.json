@@ -15,7 +15,6 @@
     "@types/pg": "^8.16.0",
     "oxfmt": "^0.32.0",
     "oxlint": "^1.47.0",
-    "prisma": "^7.4.0",
     "source-map-support": "^0.5.21",
     "tsconfig-paths": "^4.2.0",
     "tsdown": "^0.20.3",

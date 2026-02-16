@@ -29,9 +29,6 @@ importers:
       oxlint:
         specifier: ^1.47.0
         version: 1.47.0
-      prisma:
-        specifier: ^7.4.0
-        version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21
@@ -57,8 +54,8 @@ importers:
         specifier: ^5.3.4
         version: 5.3.4
       '@h3ravel/musket':
-        specifier: ^0.6.12
-        version: 0.6.18(@types/node@25.2.3)
+        specifier: ^0.10.1
+        version: 0.10.1(@types/node@25.2.3)
       '@h3ravel/shared':
         specifier: ^0.28.4
         version: 0.28.4(@types/node@25.2.3)
@@ -166,6 +163,9 @@ importers:
       '@types/method-override':
         specifier: ^3.0.0
         version: 3.0.0(@types/express@5.0.6)
+      prisma:
+        specifier: ^7.4.0
+        version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
 
   h3:
     dependencies:
@@ -217,6 +217,10 @@ importers:
       simple-body-validator:
         specifier: ^1.3.9
         version: 1.3.9
+    devDependencies:
+      prisma:
+        specifier: ^7.4.0
+        version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
 
 packages:
 
@@ -566,12 +570,15 @@ packages:
   '@h3ravel/contracts@0.28.2':
     resolution: {integrity: sha512-Pg/aKVo3Ne23G7SRESV/Fj4Iye/9Dj7+CqPQHHzMUo01+EwGb6l8biMni7lz8aUZTzKdtau+IgANyFqtU37hsQ==}
 
-  '@h3ravel/musket@0.6.18':
-    resolution: {integrity: sha512-zvEykth5Ir6ePLZXYR4O8OIeCeE7HsTsAM0tRxdXLTXQgFxNzZj9rB1O7Dz9NhdImGo5NacDTTH342ARARHLzg==}
+  '@h3ravel/musket@0.10.1':
+    resolution: {integrity: sha512-M5pwj7tv5pWTdQnw48EGOEaecPSAZ08CPwS76IRP1QSGCj0gb8gMmrUDZkXTmmDjhJlAfAEAygzLzwQwB6XdgQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
   '@h3ravel/shared@0.28.4':
     resolution: {integrity: sha512-9D+pdJ5UdLRVau4KdISRDikuUeE2NpqY2SWVgfi/SVNc9R7+eyYbRofZRujWO3H/DvVyJuPA7L6IdxWmdZcQyg==}
+
+  '@h3ravel/shared@0.30.3':
+    resolution: {integrity: sha512-Qf2GJb5IF8LvAIHH7af2Ze0DvV4IlW+ZEPhodCQtUVq+sZI1PzdSnqYcqsJ4p5pqlVyOShw8s8UFgYz5WoUjLw==}
 
   '@h3ravel/support@0.16.4':
     resolution: {integrity: sha512-JPCtnUod3lpGXIQurN+W+i3SmMki05L9/m1x4kwSfXHOtRlTp6mKAidNzpcsq/Ple4mN2oQolKQsJplGWR21OA==}
@@ -4038,9 +4045,9 @@ snapshots:
     transitivePeerDependencies:
       - crossws
 
-  '@h3ravel/musket@0.6.18(@types/node@25.2.3)':
+  '@h3ravel/musket@0.10.1(@types/node@25.2.3)':
     dependencies:
-      '@h3ravel/shared': 0.28.4(@types/node@25.2.3)
+      '@h3ravel/shared': 0.30.3(@types/node@25.2.3)
       chalk: 5.6.2
       commander: 14.0.3
       dayjs: 1.11.19
@@ -4062,6 +4069,20 @@ snapshots:
       escalade: 3.2.0
       h3: 2.0.1-rc.5
       inquirer-autocomplete-standalone: 0.8.1
+      preferred-pm: 4.1.1
+    transitivePeerDependencies:
+      - '@types/node'
+      - crossws
+
+  '@h3ravel/shared@0.30.3(@types/node@25.2.3)':
+    dependencies:
+      '@inquirer/prompts': 7.10.1(@types/node@25.2.3)
+      chalk: 5.6.2
+      edge.js: 6.4.0
+      escalade: 3.2.0
+      h3: 2.0.1-rc.5
+      inquirer-autocomplete-standalone: 0.8.1
+      ora: 9.3.0
       preferred-pm: 4.1.1
     transitivePeerDependencies:
       - '@types/node'

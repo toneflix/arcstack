@@ -1,12 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Configuration` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "Configuration";
-
 -- CreateTable
 CREATE TABLE "configurations" (
     "id" TEXT NOT NULL,

@@ -1,6 +1,6 @@
-import { Logger, Resolver, baseTsconfig, mainTsconfig, packageJsonScript } from "@h3ravel/shared";
+import { Logger, Resolver, packageJsonScript } from "@h3ravel/shared";
 import { basename, join, relative } from "node:path";
-import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
 
 import { Str } from "@h3ravel/support";
@@ -80,13 +80,7 @@ export default class {
     if (!installed) {
       Logger.parse([[await Resolver.getPakageInstallCommand(), "cyan"]]);
     }
-    Logger.parse(
-      [
-        [await this.runCmd(), "cyan"],
-        ["prepare", "green"],
-      ],
-      " ",
-    );
+
     Logger.parse(
       [
         [await this.runCmd(), "cyan"],
@@ -151,17 +145,6 @@ export default class {
 
     if (existsSync(exampleEnvPath)) {
       await copyFile(exampleEnvPath, envPath);
-    }
-  }
-
-  async createTsConfig() {
-    const tscPath = join(this.location!, ".h3ravel");
-
-    await mkdir(tscPath, { recursive: true });
-    await writeFile(join(tscPath, "tsconfig.json"), JSON.stringify(mainTsconfig, null, 2));
-    await writeFile(join(this.location!, "tsconfig.json"), JSON.stringify(baseTsconfig, null, 2));
-    if (!existsSync(join(this.location!, "src/database/db.sqlite"))) {
-      await writeFile(join(this.location!, "src/database/db.sqlite"), "");
     }
   }
 }

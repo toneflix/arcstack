@@ -28,6 +28,7 @@
     "simple-body-validator": "^1.3.9"
   },
   "devDependencies": {
+    "prisma": "^7.4.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
