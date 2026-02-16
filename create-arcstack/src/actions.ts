@@ -1,9 +1,10 @@
 import { Logger, Resolver, packageJsonScript } from "@h3ravel/shared";
-import { basename, join, relative } from "node:path";
 import { copyFile, readFile, rm, writeFile } from "node:fs/promises";
 import { detectPackageManager, installPackage } from "@antfu/install-pkg";
+import path, { basename, join, relative } from "node:path";
 
 import { Str } from "@h3ravel/support";
+import { chdir } from "node:process";
 import { downloadTemplate } from "giget";
 import { existsSync } from "node:fs";
 import { unlink } from "node:fs/promises";
@@ -72,11 +73,24 @@ export default class {
   async complete(installed = false) {
     console.log("");
 
+    const installPath = "./" + relative(process.cwd(), this.location!);
+
+    try {
+      chdir(path.join(process.cwd(), installPath));
+    } catch {
+      /** */
+    }
+
     Logger.success("Your Arcstack project has been created successfully");
-    Logger.parse([
-      ["cd", "cyan"],
-      ["./" + relative(process.cwd(), this.location!), "green"],
-    ]);
+    Logger.parse(
+      [
+        ["cd", "cyan"],
+        [installPath, "yellow"],
+        installPath === process.cwd() ? ["✔", "green"] : ["", "green"],
+      ],
+      " ",
+    );
+
     if (!installed) {
       Logger.parse([[await Resolver.getPakageInstallCommand(), "cyan"]]);
     }
@@ -84,11 +98,14 @@ export default class {
     Logger.parse(
       [
         [await this.runCmd(), "cyan"],
-        ["dev", "green"],
+        ["dev", "yellow"],
       ],
       " ",
     );
-    Logger.parse([["Open http://localhost:3000", "cyan"]]);
+    Logger.parse([
+      ["Open", "cyan"],
+      ["http://localhost:3000", "yellow"],
+    ]);
 
     console.log("");
 
