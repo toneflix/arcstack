@@ -7,6 +7,6 @@ bin/*
 !bin/logo.txt
 .DS_Store
 h3ravel
-h3-app
-express-app
 arcstack
+arcstack-h3
+arcstack-express

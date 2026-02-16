@@ -72,7 +72,7 @@ export default class {
   async complete(installed = false) {
     console.log("");
 
-    Logger.success("Your nodejs project has been created successfully");
+    Logger.success("Your Arcstack project has been created successfully");
     Logger.parse([
       ["cd", "cyan"],
       ["./" + relative(process.cwd(), this.location!), "green"],

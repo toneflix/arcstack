@@ -58,14 +58,14 @@ export class CreateArcstackCommand extends Command {
           type: "input",
           name: "appName",
           message: "What is the name of your project:",
-          default: `${template}-app`,
+          default: `arcstack-${template}`,
           when: () => !options.name,
         },
         {
           type: "input",
           name: "description",
           message: "Project Description:",
-          default: `Simple ${Str.of(template).ucfirst()}.js project created with Toneflix's Node.js starter kit.`,
+          default: `Simple ${Str.of(template).ucfirst()}.js project created with Arcstack.`,
           when: () => !options.desc,
         },
       ])
