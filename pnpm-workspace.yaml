@@ -1,7 +1,7 @@
 packages:
   - h3
   - express
-  - create-toneflix-app
+  - create-arcstack
 
 onlyBuiltDependencies:
   - '@prisma/engines'
