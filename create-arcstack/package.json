@@ -32,7 +32,8 @@
     "version": "pnpm run build",
     "unlink": "npm unlink -g create-arcstack",
     "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
-    "publish-it": "pnpm build && pnpm publish --tag latest"
+    "publish-it": "pnpm build && pnpm publish --tag latest",
+    "prepublishOnly": "pnpm build"
   },
   "files": [
     "bin",
