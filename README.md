@@ -43,9 +43,7 @@ src/
  │   ├── http/
  │   │   ├── controllers/
  │   |   |── resources/
- │   ├── services/
- │   ├── middleware/
- │   └── routes/
+ │   └── services/
  │
  ├── core/
  │   ├── commands/
