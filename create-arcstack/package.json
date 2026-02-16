@@ -1,22 +1,22 @@
 {
-  "name": "create-toneflix-nodejs",
+  "name": "create-arcstack",
   "type": "module",
-  "version": "0.6.3",
-  "description": "Scaffold new H3.js or Express.js applications using toneflix-nodejs templates and starter kits",
+  "version": "0.1.0",
+  "description": "Scaffold new H3.js or Express.js applications using Toneflix's arcstack templates and starter kits",
   "main": "build/index.js",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
   "bin": {
-    "create-toneflix-nodejs": "bin/run.js"
+    "create-arcstack": "bin/run.js"
   },
   "exports": {
     ".": "./bin/run.js"
   },
   "keywords": [
     "toneflix",
-    "create-toneflix-nodejs",
+    "create-arcstack",
     "h3",
     "express",
     "scaffold",
@@ -30,7 +30,7 @@
     "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
     "build": "tsdown",
     "version": "pnpm run build",
-    "unlink": "npm unlink -g create-toneflix-nodejs",
+    "unlink": "npm unlink -g create-arcstack",
     "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
     "publish-it": "pnpm build && pnpm publish --tag latest"
   },

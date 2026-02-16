@@ -10,8 +10,8 @@ import ora from "ora";
 import { Logger } from "@h3ravel/shared";
 import { cleanDirectoryExcept, hoistDirectoryContents } from "src/utils";
 
-export class CreateToneflixNodejsCommand extends Command {
-  protected signature = `create-toneflix-nodejs
+export class CreateArcstackCommand extends Command {
+  protected signature = `create-arcstack
         {location?: The location where this project should be created relative to the current dir.}
         {--n|name?: The name of your project.}
         {--i|install: Install node_modules right away}

@@ -21,12 +21,12 @@ export const templates: {
     name: "Express Starter Kit",
     alias: "express",
     hint: "An Express application starter kit",
-    source: "github:toneflix/toneflix-nodejs",
+    source: "github:toneflix/arcstack",
   },
   {
     name: "H3 Starter Kit",
     alias: "h3",
     hint: "A H3 application starter kit",
-    source: "github:toneflix/toneflix-nodejs",
+    source: "github:toneflix/arcstack",
   },
 ];

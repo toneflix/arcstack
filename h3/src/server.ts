@@ -17,6 +17,3 @@ detect(3000).then(async (port) => {
     process.on(signal, async () => await app.shutdown());
   });
 });
-// .catch(() => {
-//     process.exit(1);
-// });

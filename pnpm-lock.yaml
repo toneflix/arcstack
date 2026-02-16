@@ -151,6 +151,9 @@ importers:
         specifier: ^1.3.9
         version: 1.3.9
     devDependencies:
+      '@rollup/plugin-run':
+        specifier: ^3.1.0
+        version: 3.1.0(rollup@4.57.1)
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -163,9 +166,45 @@ importers:
       '@types/method-override':
         specifier: ^3.0.0
         version: 3.0.0(@types/express@5.0.6)
+      '@types/node':
+        specifier: ^25.2.3
+        version: 25.2.3
+      '@types/passport':
+        specifier: ^1.0.17
+        version: 1.0.17
+      '@types/passport-facebook':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@types/passport-google-oauth20':
+        specifier: ^2.0.17
+        version: 2.0.17
+      '@types/pg':
+        specifier: ^8.16.0
+        version: 8.16.0
+      oxfmt:
+        specifier: ^0.32.0
+        version: 0.32.0
+      oxlint:
+        specifier: ^1.47.0
+        version: 1.47.0
       prisma:
         specifier: ^7.4.0
         version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      source-map-support:
+        specifier: ^0.5.21
+        version: 0.5.21
+      tsconfig-paths:
+        specifier: ^4.2.0
+        version: 4.2.0
+      tsdown:
+        specifier: ^0.20.3
+        version: 0.20.3(typescript@5.9.3)
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
   h3:
     dependencies:
@@ -218,9 +257,48 @@ importers:
         specifier: ^1.3.9
         version: 1.3.9
     devDependencies:
+      '@rollup/plugin-run':
+        specifier: ^3.1.0
+        version: 3.1.0(rollup@4.57.1)
+      '@types/node':
+        specifier: ^25.2.3
+        version: 25.2.3
+      '@types/passport':
+        specifier: ^1.0.17
+        version: 1.0.17
+      '@types/passport-facebook':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@types/passport-google-oauth20':
+        specifier: ^2.0.17
+        version: 2.0.17
+      '@types/pg':
+        specifier: ^8.16.0
+        version: 8.16.0
+      oxfmt:
+        specifier: ^0.32.0
+        version: 0.32.0
+      oxlint:
+        specifier: ^1.47.0
+        version: 1.47.0
       prisma:
         specifier: ^7.4.0
         version: 7.4.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      source-map-support:
+        specifier: ^0.5.21
+        version: 0.5.21
+      tsconfig-paths:
+        specifier: ^4.2.0
+        version: 4.2.0
+      tsdown:
+        specifier: ^0.20.3
+        version: 0.20.3(typescript@5.9.3)
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -1279,6 +1357,15 @@ packages:
   '@rolldown/pluginutils@1.0.0-rc.3':
     resolution: {integrity: sha512-eybk3TjzzzV97Dlj5c+XrBFW57eTNhzod66y9HrBlzJ6NsCrWCp/2kaPS3K9wJmurBC0Tdw4yPjXKZqlznim3Q==}
 
+  '@rollup/plugin-run@3.1.0':
+    resolution: {integrity: sha512-k2daijcVA8RAG1PXUFtIAOmb9ifiMv6Kth3Y9OhZ8/W+j8eTgZkVsOmBQD11HaeY1rYqRb0aLjX4e2V9bpS01Q==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   '@rollup/rollup-android-arm-eabi@4.57.1':
     resolution: {integrity: sha512-A6ehUVSiSaaliTxai040ZpZ2zTevHYbvu/lDoeAteHI8QnaosIzm4qwtezfRg1jOYaUmnzLX1AOD6Z+UJjtifg==}
     cpu: [arm]
@@ -1553,6 +1640,9 @@ packages:
 
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
+
+  '@types/node@14.18.30':
+    resolution: {integrity: sha512-8OEyg4oc/CqN5+LbInKNLA8MfbGzbC+k8lVPePXazuwEVrVeQ9gwMDX00HJwWbC7syc1FWRU6Mow0Lm+mibHAQ==}
 
   '@types/node@20.19.33':
     resolution: {integrity: sha512-Rs1bVAIdBs5gbTIKza/tgpMuG1k3U/UMJLWecIMxNdJFDMzcM5LOiLVRYh3PilWEYDIeUDv7bpiHPLPsbydGcw==}
@@ -3482,9 +3572,6 @@ packages:
   uid2@0.0.4:
     resolution: {integrity: sha512-IevTus0SbGwQzYh3+fRsAMTVVPOoIVufzacXcHPmdlle1jUpq7BRL+mw3dgeLanvGZdwwbWhRV6XrcFNdBmjWA==}
 
-  unconfig-core@7.4.2:
-    resolution: {integrity: sha512-VgPCvLWugINbXvMQDf8Jh0mlbvNjNC6eSUziHsBCMpxR05OPrNrvDnyatdMjRgcHaaNsCqz+wjNXxNw1kRLHUg==}
-
   unconfig-core@7.5.0:
     resolution: {integrity: sha512-Su3FauozOGP44ZmKdHy2oE6LPjk51M/TRRjHv2HNCWiDvfvCoxC2lno6jevMA91MYAdCdwP05QnWdWpSbncX/w==}
 
@@ -4643,6 +4730,12 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-rc.3': {}
 
+  '@rollup/plugin-run@3.1.0(rollup@4.57.1)':
+    dependencies:
+      '@types/node': 14.18.30
+    optionalDependencies:
+      rollup: 4.57.1
+
   '@rollup/rollup-android-arm-eabi@4.57.1':
     optional: true
 
@@ -4849,6 +4942,8 @@ snapshots:
       '@types/node': 20.19.33
 
   '@types/node@12.20.55': {}
+
+  '@types/node@14.18.30': {}
 
   '@types/node@20.19.33':
     dependencies:
@@ -6745,7 +6840,7 @@ snapshots:
       tinyexec: 1.0.2
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
-      unconfig-core: 7.4.2
+      unconfig-core: 7.5.0
       unrun: 0.2.27
     optionalDependencies:
       typescript: 5.9.3
@@ -6780,11 +6875,6 @@ snapshots:
   typescript@5.9.3: {}
 
   uid2@0.0.4: {}
-
-  unconfig-core@7.4.2:
-    dependencies:
-      '@quansync/fs': 1.0.0
-      quansync: 1.0.0
 
   unconfig-core@7.5.0:
     dependencies:
