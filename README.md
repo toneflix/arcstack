@@ -1,5 +1,8 @@
 # Arcstack
 
+[![Create Arcstack][i1]][l1]
+[![Downloads][d1]][l1]
+
 A framework-agnostic backend starter kit for modern TypeScript servers.
 
 Arcstack provides a structured foundation for building APIs with Express, H3, and future runtimes — without locking your application to a single framework.
@@ -177,3 +180,7 @@ When adding framework adapters:
 ## License
 
 MIT
+
+[i1]: https://img.shields.io/npm/v/create-arcstack?style=flat-square&label=create-arcstack&color=%230970ce
+[l1]: https://www.npmjs.com/package/create-arcstack
+[d1]: https://img.shields.io/npm/dt/create-arcstack?style=flat-square&label=Downloads&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fcreate-arcstack
