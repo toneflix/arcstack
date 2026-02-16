@@ -1,0 +1,105 @@
+import BaseController from '@controllers/BaseController';
+import { HttpContext } from 'clear-router/types/h3'
+import Resource from '@core/JsonApiResource';
+import { prisma } from '@core/DB';
+import { readBody } from 'h3';
+
+/**
+ * {{ControllerName}}
+ */
+export default class extends BaseController {
+    /**
+     * Get all resource from the database
+     * 
+     * @param req 
+     * @param res 
+     */
+    index = async (evt: HttpContext) => {
+        const data = await prisma.{{ModelName}}.findMany(
+            { orderBy: { id: 'asc' } }
+        )
+
+        return Resource(evt, { data }).json().status(200).additional({
+            status: 'success',
+            message: 'OK',
+            code: 200,
+        });
+    }
+
+    /**
+     * Get a specific resource from the database
+     * 
+     * @param req 
+     * @param res 
+     */
+    show = async (evt: HttpContext) => {
+        const data = await prisma.{{ModelName}}.findFirst(
+            { where: { id: String(evt.context.params?.id) } }
+        )
+
+        return Resource(evt, { data }).json().status(200).additional({
+            status: 'success',
+            message: 'OK',
+            code: 200,
+        });
+    }
+
+    /**
+     * Create a new resource in the database
+     * 
+     * The calling route must recieve a multer.RequestHandler instance
+     * 
+     * @example router.post('/{{ModelName}}s', upload.none(), new AdminController().create);
+     * 
+     * @param req 
+     * @param res 
+     */
+    create = async (evt: HttpContext) => {
+        const data = await prisma.{{ModelName}}.create({
+            data: readBody(evt) as any,
+        })
+
+        return Resource(evt, { data }).json().status(201).additional({
+            status: 'success',
+            message: 'New {{ModelName}} created successfully',
+            code: 201,
+        });
+    }
+
+    /**
+     * Update a specific resource in the database
+     * 
+     * @param req 
+     * @param res 
+     */
+    update = async (evt: HttpContext) => {
+        const data = await prisma.{{ModelName}}.update({
+            where: { id: String(evt.context.params?.id) },
+            data: readBody(evt) as any,
+        })
+
+        return Resource(evt, { data }).json().status(202).additional({
+            status: 'success',
+            message: '{{ModelName}} updated successfully',
+            code: 202,
+        });
+    }
+
+    /**
+     * Delete a specific resource from the database
+     * 
+     * @param req 
+     * @param res 
+     */
+    destroy = async (evt: HttpContext) => {
+        await prisma.{{ModelName}}.delete(
+            { where: { id: String(evt.context.params?.id) } }
+        )
+
+        return Resource(evt, { data: null }).json().status(202).additional({
+            status: 'success',
+            message: '{{ModelName}} deleted successfully',
+            code: 202,
+        });
+    }
+}

@@ -1,0 +1,8 @@
+import { Router } from "src/core/Router";
+import UserController from "src/app/http/controllers/UserController";
+
+Router.get("/hello", () => {
+  return "Hello World";
+});
+
+Router.apiResource("/users", UserController);

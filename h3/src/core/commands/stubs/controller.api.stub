@@ -1,0 +1,79 @@
+import BaseController from '@controllers/BaseController';
+import { HttpContext } from 'clear-router/types/h3'
+
+import Resource from '@core/JsonApiResource';
+
+/**
+ * {{ControllerName}}
+ */
+export default class extends BaseController {
+    /**
+     * Get all resources
+     * 
+     * @param req 
+     * @param res 
+     */
+    index = async (evt: HttpContext) => {
+        return await Resource(evt, { data: [] }).json().status(200).additional({
+        status: 'success',
+        message: 'OK',
+        code: 200,
+        });
+    }
+
+    /**
+     * Get a specific resource
+     * 
+     * @param req 
+     * @param res 
+     */
+    show = async (evt: HttpContext) => {
+        return Resource(evt, { data: {} }).json().status(200).additional({
+        status: 'success',
+        message: 'OK',
+        code: 200,
+        });
+    }
+
+    /**
+     * Create a resource
+     * 
+     * @param req 
+     * @param res 
+     */
+    create = async (evt: HttpContext) => {
+        return Resource(evt, { data: {} }).json().status(201).additional({
+            status: 'success',
+            message: 'New {{Name}} created successfully',
+            code: 201,
+        });
+    }
+
+    /**
+     * Update a specific resource
+     * 
+     * @param req 
+     * @param res 
+     */
+    update = async (evt: HttpContext) => {
+        return Resource(evt, { data: {} }).json().status(202).additional({
+            status: 'success',
+            message: '{{Name}} updated successfully',
+            code: 202,
+        });
+    }
+
+    /**
+     * Delete a specific resource
+     * 
+     * @param req 
+     * @param res 
+     */
+    destroy = async (evt: HttpContext) => {
+        return Resource(evt, { data: {} }).json().status(202).additional({
+            status: 'success',
+            message: '{{Name}} deleted successfully',
+            code: 202,
+        });
+    }
+}

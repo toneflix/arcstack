@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.path.oxfmt": "node_modules/.bin/oxfmt",
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.trace.server": "verbose",
+  "oxc.enable": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  }
+}

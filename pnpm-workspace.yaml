@@ -1,0 +1,10 @@
+onlyBuiltDependencies:
+  - '@prisma/engines'
+  - argon2
+  - esbuild
+  - prisma
+
+packages:
+  - h3
+  - express
+  - create-toneflix-app

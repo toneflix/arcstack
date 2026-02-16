@@ -1,0 +1,102 @@
+import BaseController from '@controllers/BaseController'
+import { HttpContext } from 'clear-router/types/express'
+import Resource from '@core/JsonApiResource'
+
+/**
+ * UserController
+ */
+export default class extends BaseController {
+  /**
+   * Get all resources
+   *
+   * @param req
+   * @param res
+   */
+  index = async ({ req, res }: HttpContext) => {
+    return Resource(req, res, {
+      data: {},
+    })
+      .json()
+      .status(200)
+      .additional({
+        status: 'success',
+        message: 'OK',
+        code: 200,
+      })
+  }
+
+  /**
+   * Get a specific resource
+   *
+   * @param req
+   * @param res
+   */
+  show = async ({ req, res }: HttpContext) => {
+    return Resource(req, res, {
+      data: {},
+    })
+      .json()
+      .status(200)
+      .additional({
+        status: 'success',
+        message: 'OK',
+        code: 200,
+      })
+  }
+
+  /**
+   * Create a resource
+   *
+   * @param req
+   * @param res
+   */
+  create = async ({ req, res }: HttpContext) => {
+    return Resource(req, res, {
+      data: {},
+    })
+      .json()
+      .status(201)
+      .additional({
+        status: 'success',
+        message: 'New User created successfully',
+        code: 201,
+      })
+  }
+
+  /**
+   * Update a specific resource
+   *
+   * @param req
+   * @param res
+   */
+  update = async ({ req, res }: HttpContext) => {
+    return Resource(req, res, {
+      data: {},
+    })
+      .json()
+      .status(202)
+      .additional({
+        status: 'success',
+        message: 'User updated successfully',
+        code: 202,
+      })
+  }
+
+  /**
+   * Delete a specific resource
+   *
+   * @param req
+   */
+  destroy = async ({ req, res }: HttpContext) => {
+    return Resource(req, res, {
+      data: {},
+    })
+      .json()
+      .status(202)
+      .additional({
+        status: 'success',
+        message: 'User deleted successfully',
+        code: 202,
+      })
+  }
+}

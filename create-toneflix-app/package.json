@@ -1,0 +1,62 @@
+{
+  "name": "create-toneflix-nodejs",
+  "type": "module",
+  "version": "0.6.3",
+  "description": "Scaffold new H3.js or Express.js applications using toneflix-nodejs templates and starter kits",
+  "main": "build/index.js",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "create-toneflix-nodejs": "bin/run.js"
+  },
+  "exports": {
+    ".": "./bin/run.js"
+  },
+  "keywords": [
+    "toneflix",
+    "create-toneflix-nodejs",
+    "h3",
+    "express",
+    "scaffold",
+    "template",
+    "starter kit",
+    "cli"
+  ],
+  "scripts": {
+    "quick:test": "pnpm vitest",
+    "test": "pnpm run quick:test",
+    "runner": "tsx --experimental-specifier-resolution=node src/run.ts",
+    "build": "tsdown",
+    "version": "pnpm run build",
+    "unlink": "npm unlink -g create-toneflix-nodejs",
+    "release": "pnpm build && pnpm changeset version && pnpm changeset publish",
+    "publish-it": "pnpm build && pnpm publish --tag latest"
+  },
+  "files": [
+    "bin",
+    "bin/run.d.ts",
+    "bin/run.js"
+  ],
+  "dependencies": {
+    "@antfu/install-pkg": "1.1.0",
+    "@h3ravel/collect.js": "^5.3.4",
+    "@h3ravel/musket": "^0.6.12",
+    "@h3ravel/shared": "^0.28.4",
+    "@h3ravel/support": "^0.16.1",
+    "@inquirer/core": "^10.2.2",
+    "giget": "^2.0.0",
+    "inquirer": "^12.9.6",
+    "ora": "^9.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.5",
+    "eslint": "^9.32.0",
+    "ts-node": "^10.9.2",
+    "tsdown": "^0.15.4",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.14.0"
+}

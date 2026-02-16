@@ -1,0 +1,14 @@
+import { JsonResource } from '@core/JsonApiResource';
+
+/**
+ * {{ResourceName}}
+ */
+export default class extends JsonResource {
+    /**
+     * Build the response object
+     * @returns this
+     */
+    data () {
+        return this.toArray();
+    }
+}
