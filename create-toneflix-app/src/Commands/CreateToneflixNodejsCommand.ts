@@ -58,14 +58,14 @@ export class CreateToneflixNodejsCommand extends Command {
           type: "input",
           name: "appName",
           message: "What is the name of your project:",
-          default: "toneflix-nodejs",
+          default: `${template}-app`,
           when: () => !options.name,
         },
         {
           type: "input",
           name: "description",
           message: "Project Description:",
-          default: `Simple ${template} project created with Toneflix's Node.js starter kit.`,
+          default: `Simple ${Str.of(template).ucfirst()}.js project created with Toneflix's Node.js starter kit.`,
           when: () => !options.desc,
         },
       ])
