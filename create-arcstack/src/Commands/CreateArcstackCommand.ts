@@ -26,7 +26,7 @@ export class CreateArcstackCommand extends Command {
   async handle() {
     const options = this.options();
     const pathName = this.argument("location");
-    const defaultName = pathName ? Str.of(pathName).afterLast("/") : undefined;
+    // const defaultName = pathName ? Str.of(pathName).afterLast("/") : undefined;
 
     console.log(altLogo, `font-family: monospace`);
 
@@ -59,7 +59,8 @@ export class CreateArcstackCommand extends Command {
           type: "input",
           name: "appName",
           message: "What is the name of your project:",
-          default: defaultName ?? `arcstack-${template}`,
+          default: `arcstack-${template}`,
+          // default: defaultName ?? `arcstack-${template}`,
           when: () => !options.name,
         },
         {
