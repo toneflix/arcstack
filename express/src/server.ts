@@ -1,10 +1,7 @@
-import Application from "src/core/app";
+import { app } from "./core/bootstrap";
 import { detect } from "detect-port";
-import express from "express";
 
 detect(3000).then(async (port) => {
-  const app = new Application(express());
-
   await app.boot(port);
 
   // Handle graceful shutdown

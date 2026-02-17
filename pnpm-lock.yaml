@@ -96,6 +96,9 @@ importers:
 
   express:
     dependencies:
+      '@h3ravel/musket':
+        specifier: ^0.10.1
+        version: 0.10.1(@types/node@25.2.3)
       '@prisma/adapter-pg':
         specifier: ^7.4.0
         version: 7.4.0
@@ -208,6 +211,9 @@ importers:
 
   h3:
     dependencies:
+      '@h3ravel/musket':
+        specifier: ^0.10.1
+        version: 0.10.1(@types/node@25.2.3)
       '@prisma/adapter-pg':
         specifier: ^7.4.0
         version: 7.4.0

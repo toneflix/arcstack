@@ -19,7 +19,8 @@ export class Router extends ClearRouter {
     return router;
   }
 
-  static list(_options: { path?: string }) {
-    console.log("Registered Routes:", this.allRoutes());
+  static list(_options: { path?: string }, app: H3) {
+    this.bind(app);
+    return this.allRoutes();
   }
 }

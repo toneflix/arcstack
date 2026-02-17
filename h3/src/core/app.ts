@@ -24,6 +24,10 @@ export default class Application {
     Application.app = this.app;
   }
 
+  getH3Instance() {
+    return this.app;
+  }
+
   static getH3Instance() {
     return Application.app;
   }
@@ -46,14 +50,11 @@ export default class Application {
       passport.use(facebookStrategy());
     }
 
-    // Initialize Passport
-    // this.app.use(passport.initialize());
-
     // Bind the router
     Router.bind(this.app);
 
     // Start the server
-    serve(this.app, { port });
+    serve(this.app, { port, silent: true });
     console.log(`Server is running on http://localhost:${port}`);
   }
 

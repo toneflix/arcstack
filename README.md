@@ -49,7 +49,7 @@ src/
  │   └── services/
  │
  ├── core/
- │   ├── commands/
+ │   ├── console/
  │   ├── middlewares/
  │   └── utils/
  │

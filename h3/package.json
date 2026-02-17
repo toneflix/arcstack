@@ -7,9 +7,10 @@
     "lint:fix": "oxlint --fix && oxfmt",
     "dev": "tsdown --log-level silent",
     "build": "NODE_ENV=production tsdown",
-    "cmd": "tsx src/core/commands/server.ts"
+    "cmd": "tsx src/core/console/index.ts"
   },
   "dependencies": {
+    "@h3ravel/musket": "^0.10.1",
     "@prisma/adapter-pg": "^7.4.0",
     "@prisma/client": "^7.4.0",
     "argon2": "^0.44.0",

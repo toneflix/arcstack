@@ -22,6 +22,6 @@ export class Router extends ClearRouter {
   }
 
   static list(_options: { path?: string }) {
-    console.log("Registered Routes:", this.allRoutes());
+    return this.allRoutes();
   }
 }
