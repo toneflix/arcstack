@@ -6,22 +6,22 @@ import { H3Event } from "h3";
 export interface Resource {
   [key: string]: any;
   pagination?:
-    | {
-        from?: number | undefined;
-        to?: number | undefined;
-        perPage?: number | undefined;
-        total?: number | undefined;
-      }
-    | undefined;
+  | {
+    from?: number | undefined;
+    to?: number | undefined;
+    perPage?: number | undefined;
+    total?: number | undefined;
+  }
+  | undefined;
 }
 
 type BodyResource = Resource & {
   data: Omit<Resource, "pagination">;
   meta?:
-    | {
-        pagination?: Resource["pagination"];
-      }
-    | undefined;
+  | {
+    pagination?: Resource["pagination"];
+  }
+  | undefined;
 };
 
 /**
@@ -38,16 +38,22 @@ export class JsonResource<R extends Resource = any> {
     this.resource = rsc;
 
     /* Copy properties from rsc */
-    for (const key of Object.keys(rsc)) {
+    for (const key of Object.keys(rsc.data ?? rsc)) {
       if (!(key in this)) {
         Object.defineProperty(this, key, {
           enumerable: true,
           configurable: true,
-          get: () => this.resource[key],
-          set: (value) => {
-            (<any>this.resource)[key] = value;
+          get: () => {
+            return this.resource.data?.[key] ?? this.resource[key]
           },
-        });
+          set: (value) => {
+            if ((<any>this.resource).data && this.resource.data[key]) {
+              this.resource.data[key] = value;
+            } else {
+              (<any>this.resource)[key] = value;
+            }
+          },
+        })
       }
     }
   }
@@ -55,14 +61,14 @@ export class JsonResource<R extends Resource = any> {
   /**
    * Return raw resource
    */
-  data(): R {
+  data (): R {
     return this.resource;
   }
 
   /**
    * Build JSON structure
    */
-  json() {
+  json () {
     const resource = this.data();
 
     let data: any = Array.isArray(resource) ? [...resource] : { ...resource };
@@ -77,9 +83,9 @@ export class JsonResource<R extends Resource = any> {
 
     this.body = { data };
 
-    if (!Array.isArray(resource) && resource.pagination) {
+    if (!Array.isArray(resource) && this.resource.pagination) {
       this.body.meta = {
-        pagination: resource.pagination,
+        pagination: this.resource.pagination,
       };
     }
 
@@ -91,7 +97,7 @@ export class JsonResource<R extends Resource = any> {
    *
    * @returns
    */
-  toArray() {
+  toArray () {
     const resource = this.resource;
     let data: any = Array.isArray(resource) ? [...resource] : { ...resource };
 
@@ -105,7 +111,7 @@ export class JsonResource<R extends Resource = any> {
   /**
    * Merge additional fields
    */
-  additional<X extends Record<string, any>>(extra: X) {
+  additional<X extends Record<string, any>> (extra: X) {
     delete extra.data;
     delete extra.pagination;
 
@@ -120,7 +126,7 @@ export class JsonResource<R extends Resource = any> {
   /**
    * Set response status
    */
-  status(code: number) {
+  status (code: number) {
     this.event.res.status = code;
     return this;
   }
@@ -128,7 +134,7 @@ export class JsonResource<R extends Resource = any> {
   /**
    * Make this instance Promise-like
    */
-  then<TResult1 = BodyResource, TResult2 = never>(
+  then<TResult1 = BodyResource, TResult2 = never> (
     onfulfilled?: ((value: BodyResource) => TResult1 | PromiseLike<TResult1>) | null,
     onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null,
   ): Promise<TResult1 | TResult2> {
@@ -136,10 +142,10 @@ export class JsonResource<R extends Resource = any> {
   }
 }
 
-export function ApiResource(instance: JsonResource) {
+export function ApiResource (instance: JsonResource) {
   return instance;
 }
 
-export default function BaseResource<R extends Resource>(evt: H3Event, rsc: R) {
+export default function BaseResource<R extends Resource> (evt: H3Event, rsc: R) {
   return ApiResource(new JsonResource<R>(evt, rsc));
 }
