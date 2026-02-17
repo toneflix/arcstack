@@ -77,7 +77,7 @@ export class JsonResource<R extends Resource = any> {
    * @returns
    */
   toArray() {
-    const resource = this.data();
+    const resource = this.resource;
     let data: any = Array.isArray(resource) ? [...resource] : { ...resource };
 
     if (typeof data.data !== "undefined") {
