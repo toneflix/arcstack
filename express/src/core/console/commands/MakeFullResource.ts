@@ -5,7 +5,7 @@ import { Command } from "@h3ravel/musket";
 export class MakeFullResource extends Command {
     protected signature = `make:full-resource
         {prefix : prefix of the resources to create, "Admin" will create AdminResource, AdminCollection and AdminController} 
-        {--collection : make a resource collection}
+        {--c|collection : make a resource collection}
     `;
 
     protected description = 'Create a full new set of API resources (Controller, Resource, Collection)';
