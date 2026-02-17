@@ -10,6 +10,8 @@ export class MakeResource extends Command {
   protected description = "Create a new resource or resource collection file";
 
   async handle() {
-    makeResource(this.argument("name"), this.options());
+    const name = makeResource(this.argument("name"), this.options());
+
+    this.success(`Created resource: ${name}`);
   }
 }

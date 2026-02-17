@@ -11,6 +11,8 @@ export class MakeController extends Command {
   protected description = "Create a new controller file";
 
   async handle() {
-    makeController(this.argument("name"), this.options());
+    const name = makeController(this.argument("name"), this.options());
+
+    this.success(`Controller ${name} created successfully!`);
   }
 }
