@@ -5,7 +5,7 @@ import { Command } from "@h3ravel/musket";
 export class MakeFullResource extends Command {
   protected signature = `make:full-resource
         {prefix : prefix of the resources to create, "Admin" will create AdminResource, AdminCollection and AdminController} 
-        {--c|collection : make a resource collection}
+        {--m|model? : name of model to attach to the generated controller}
     `;
 
   protected description =
