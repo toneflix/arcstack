@@ -71,12 +71,14 @@ export class JsonResource<R extends Resource = any> {
     this.resource = rsc
 
     /* Copy properties from rsc */
-    for (const key of Object.keys(rsc)) {
+    for (const key of Object.keys(rsc.data ?? rsc)) {
       if (!(key in this)) {
         Object.defineProperty(this, key, {
           enumerable: true,
           configurable: true,
-          get: () => this.resource[key],
+          get: () => {
+            return this.resource.data?.[key] ?? this.resource[key]
+          },
           set: (value) => {
             ;(<any>this.resource)[key] = value
           },
