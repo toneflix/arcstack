@@ -7,4 +7,7 @@ import path from "node:path";
 await Kernel.init(app, {
   name: "Cmd",
   discoveryPaths: [path.join(process.cwd(), "src/core/console/commands/*.ts")],
+  exceptionHandler(exception) {
+    throw exception;
+  },
 });
