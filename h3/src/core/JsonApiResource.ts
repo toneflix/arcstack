@@ -28,6 +28,7 @@ type BodyResource = Resource & {
  * Class to render API resource
  */
 export class JsonResource<R extends Resource = any> {
+  [key: string]: any;
   public resource: R;
   public event: H3Event;
   private body: BodyResource = { data: {} };
@@ -35,6 +36,20 @@ export class JsonResource<R extends Resource = any> {
   constructor(event: H3Event, rsc: R) {
     this.event = event;
     this.resource = rsc;
+
+    /* Copy properties from rsc */
+    for (const key of Object.keys(rsc)) {
+      if (!(key in this)) {
+        Object.defineProperty(this, key, {
+          enumerable: true,
+          configurable: true,
+          get: () => this.resource[key],
+          set: (value) => {
+            (<any>this.resource)[key] = value;
+          },
+        });
+      }
+    }
   }
 
   /**
