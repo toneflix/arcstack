@@ -48,6 +48,8 @@ src/
  │   |   |── resources/
  │   └── services/
  │
+ ├── config/
+ │
  ├── core/
  │   ├── console/
  │   ├── middlewares/

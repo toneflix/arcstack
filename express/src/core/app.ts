@@ -1,69 +1,51 @@
-import express, { Express } from 'express'
-import { facebookStrategy, googleStrategy } from './utils/passport'
+import express, { Express } from "express";
 
-import ErrorHandler from './utils/request-handlers'
-import { Router } from '@core/Router'
-import cors from 'cors'
-import { env } from './utils/helpers'
-import methodOverride from 'method-override'
-import passport from 'passport'
-import path from 'path'
-import { prisma } from '@core/DB'
+import ErrorHandler from "./utils/request-handlers";
+import { Router } from "src/core/router";
+import config from "src/config/middleware";
+import path from "path";
+import { prisma } from "src/core/database";
 
 export default class Application {
-  private app: Express
-  private static app: Express
+  private app: Express;
+  private static app: Express;
 
   constructor(app?: Express) {
-    this.app = app ?? express()
-    Application.app = this.app
+    this.app = app ?? express();
+    Application.app = this.app;
   }
 
   static getExpressInstance() {
-    return Application.app
+    return Application.app;
   }
 
   public async boot(port: number) {
-    // Parse application/json
-    this.app.use(express.json())
-
-    // Parse application/x-www-form-urlencoded (for non-multipart forms)
-    this.app.use(express.urlencoded({ extended: true }))
-
     // Load public assets
-    this.app.use(express.static(path.join(process.cwd(), 'public')))
-
-    // Method Override
-    this.app.use(methodOverride('X-HTTP-Method'))
-
-    // Handle CORS
-    this.app.use(cors())
-
-    // Passport
-    if (env('GOOGLE_CLIENT_ID')) {
-      passport.use(googleStrategy())
-    }
-    if (env('FACEBOOK_CLIENT_ID')) {
-      passport.use(facebookStrategy())
-    }
-
-    // Initialize Passport
-    this.app.use(passport.initialize())
+    this.app.use(express.static(path.join(process.cwd(), "public")));
 
     // Bind the router
-    this.app.use(Router.bind())
+    this.app.use(Router.bind());
 
     // Error Handler
-    this.app.use(ErrorHandler)
+    this.app.use(ErrorHandler);
+
+    for (const middleware of config(this.app).global) {
+      this.app.use(middleware);
+    }
 
     // Start the server
     this.app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`)
-    })
+      console.log(`Server is running on http://localhost:${port}`);
+    });
+
+    // Handle graceful shutdown
+    ["SIGINT", "SIGTERM", "SIGQUIT"].forEach((signal) => {
+      process.on(signal, async () => await this.shutdown());
+    });
   }
 
   async shutdown() {
-    await prisma.$disconnect()
-    process.exit(0)
+    await prisma.$disconnect();
+    process.exit(0);
   }
 }

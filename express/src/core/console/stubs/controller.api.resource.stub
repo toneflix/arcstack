@@ -1,6 +1,9 @@
-import BaseController from '@controllers/BaseController';
+import BaseController from '@controllers/BaseController'
 import { HttpContext } from 'clear-router/types/express'
-import { Resource, ResourceCollection } from "resora";
+import {{ResourceName}} from '@app/http/resources/{{ResourceName}}'
+import {{CollectionResourceName}} from '@app/http/resources/{{CollectionResourceName}}'
+
+import { Resource, ResourceCollection } from 'resora';
 
 /**
  * {{ControllerName}}
@@ -13,10 +16,10 @@ export default class extends BaseController {
      * @param res 
      */
     index = async ({ res }: HttpContext) => {
-        return new ResourceCollection({ data: [] }, res)
+        return await new ResourceCollection( { data: [] }, res)
         .additional({
-            status: "success",
-            message: "OK",
+            status: 'success',
+            message: 'OK',
             code: 200,
         })
         .response()
@@ -32,8 +35,8 @@ export default class extends BaseController {
     show = async ({ res }: HttpContext) => {
         return new Resource({ data: {} }, res)
         .additional({
-            status: "success",
-            message: "OK",
+            status: 'success',
+            message: 'OK',
             code: 200,
         })
         .response()
@@ -49,8 +52,8 @@ export default class extends BaseController {
     create = async ({ res }: HttpContext) => {
         return new Resource({ data: {} }, res)
         .additional({
-            status: "success",
-            message: "New {{Name}} created successfully",
+            status: 'success',
+            message: 'New {{Name}} created successfully',
             code: 201,
         })
         .response()
@@ -66,8 +69,8 @@ export default class extends BaseController {
     update = async ({ res }: HttpContext) => {
         return new Resource({ data: {} }, res)
         .additional({
-            status: "success",
-            message: "{{Name}} updated successfully",
+            status: 'success',
+            message: '{{Name}} updated successfully',
             code: 202,
         })
         .response()
@@ -77,13 +80,14 @@ export default class extends BaseController {
     /**
      * Delete a specific resource
      * 
+     * @param req 
      * @param res 
      */
     destroy = async ({ res }: HttpContext) => {
         return new Resource({ data: {} }, res)
         .additional({
-            status: "success",
-            message: "{{Name}} deleted successfully",
+            status: 'success',
+            message: '{{Name}} deleted successfully',
             code: 202,
         })
         .response()

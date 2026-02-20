@@ -12,6 +12,17 @@ declare module "clear-router/types/h3" {
   }
 }
 
+declare module "resora" {
+  interface Config {
+    stubs: {
+      controller: string;
+      api: string;
+      model: string;
+      apiResource: string;
+    };
+  }
+}
+
 declare global {
   interface String {
     titleCase(): string;

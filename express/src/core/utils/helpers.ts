@@ -1,11 +1,11 @@
 // oxlint-disable typescript/no-explicit-any
-import { NextFunction, Request, Response } from 'express'
-import { constructFrom, isPast } from 'date-fns'
+import { NextFunction, Request, Response } from "express";
+import { constructFrom, isPast } from "date-fns";
 
-import { Flatten } from 'src/types/basic'
-import { RequestError } from './errors'
-import jwt from 'jsonwebtoken'
-import { prisma } from 'src/core/DB'
+import { Flatten } from "src/types/basic";
+import { RequestError } from "./errors";
+import jwt from "jsonwebtoken";
+import { prisma } from "src/core/database";
 
 /**
  * Flatten an object with array values
@@ -21,8 +21,8 @@ export const flattenObject = (
       key,
       Array.isArray(value) ? (value[0] ?? undefined) : value,
     ]),
-  )
-}
+  );
+};
 
 /**
  * Flatten an object and make it dot.accessible
@@ -35,20 +35,20 @@ export const doter = <T extends Record<string, unknown>>(
   obj: T,
   currentKey?: string,
 ): Flatten<T> => {
-  const result: Record<string, unknown> = {}
+  const result: Record<string, unknown> = {};
 
   for (const [key, value] of Object.entries(obj)) {
-    const newKey = currentKey ? `${currentKey}.${key}` : key
+    const newKey = currentKey ? `${currentKey}.${key}` : key;
 
-    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      Object.assign(result, doter(value as Record<string, unknown>, newKey))
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      Object.assign(result, doter(value as Record<string, unknown>, newKey));
     } else {
-      result[newKey] = value
+      result[newKey] = value;
     }
   }
 
-  return result as Flatten<T>
-}
+  return result as Flatten<T>;
+};
 
 /**
  * Generate JWT access token
@@ -57,56 +57,56 @@ export const doter = <T extends Record<string, unknown>>(
  * @returns
  */
 export const generateAccessToken = (data: { username: string; id: string; index: number }) => {
-  const token = jwt.sign(data, env('JWT_SECRET', ''), {
-    expiresIn: env('JWT_EXPIRES_IN'),
-  })
-  const tokenData = jwt.verify(token, env('JWT_SECRET', '')) as jwt.JwtPayload
+  const token = jwt.sign(data, env("JWT_SECRET", ""), {
+    expiresIn: env("JWT_EXPIRES_IN"),
+  });
+  const tokenData = jwt.verify(token, env("JWT_SECRET", "")) as jwt.JwtPayload;
 
-  return { token, jwt: tokenData }
-}
+  return { token, jwt: tokenData };
+};
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
-  RequestError.assertFound(token, 'Unauthenticated', 401, req, res)
+  RequestError.assertFound(token, "Unauthenticated", 401, req, res);
 
   try {
-    jwt.verify(token!, env('JWT_SECRET', ''), async (err: any, jwtPayload: any) => {
-      RequestError.assertFound(!err, 'Unauthenticated', 401)
+    jwt.verify(token!, env("JWT_SECRET", ""), async (err: any, jwtPayload: any) => {
+      RequestError.assertFound(!err, "Unauthenticated", 401);
 
       const accessToken = await prisma.personalAccessToken.findFirst({
         where: { token },
         include: { user: true },
-      })
+      });
 
-      let user = accessToken?.user
+      let user = accessToken?.user;
 
       // Test environment fallback: allow JWT-only auth without DB token lookup
-      if (!user && process.env.NODE_ENV === 'test' && jwtPayload?.id) {
+      if (!user && process.env.NODE_ENV === "test" && jwtPayload?.id) {
         user = (await prisma.user.findUnique({
           where: { id: jwtPayload.id },
-        })) as never
+        })) as never;
       }
 
       // Check if user exists and token is valid (with null-safe expiry check)
       if (
         !user ||
-        (!accessToken && process.env.NODE_ENV !== 'test') ||
+        (!accessToken && process.env.NODE_ENV !== "test") ||
         (accessToken && isPast(constructFrom(accessToken.expiresAt!, new Date())))
       ) {
-        return RequestError.abortIf(true, 'Unauthenticated', 401, req, res)
+        return RequestError.abortIf(true, "Unauthenticated", 401, req, res);
       }
 
-      req.user = user as never
-      req.authToken = accessToken?.token
+      req.user = user as never;
+      req.authToken = accessToken?.token;
 
-      next()
-    })
+      next();
+    });
   } catch {
-    RequestError.abortIf(true, 'Unauthenticated', 401, req, res)
+    RequestError.abortIf(true, "Unauthenticated", 401, req, res);
   }
-}
+};
 
 /**
  * Read the .env file
@@ -119,28 +119,28 @@ export const env = <X = string, Y = undefined>(
   env: string,
   defaultValue?: Y,
 ): Y extends undefined ? X : Y => {
-  let val: string | number | boolean | undefined | null = process.env[env] ?? ''
+  let val: string | number | boolean | undefined | null = process.env[env] ?? "";
 
-  if ([true, 'true', 'on', false, 'false', 'off'].includes(val)) {
-    val = [true, 'true', 'on'].includes(val)
+  if ([true, "true", "on", false, "false", "off"].includes(val)) {
+    val = [true, "true", "on"].includes(val);
   }
 
-  if (!isNaN(Number(val)) && typeof val !== 'boolean') {
-    val = Number(val)
+  if (!isNaN(Number(val)) && typeof val !== "boolean") {
+    val = Number(val);
   }
 
-  if (val === '') {
-    val = undefined
+  if (val === "") {
+    val = undefined;
   }
 
-  if (val === 'null') {
-    val = null
+  if (val === "null") {
+    val = null;
   }
 
-  val ??= defaultValue as typeof val
+  val ??= defaultValue as typeof val;
 
-  return val as Y extends undefined ? X : Y
-}
+  return val as Y extends undefined ? X : Y;
+};
 
 /**
  * Build the app url
@@ -149,41 +149,41 @@ export const env = <X = string, Y = undefined>(
  * @returns
  */
 export const appUrl = (link?: string): string => {
-  const port = env('PORT') || '3000'
-  const defaultUrl = `http://localhost:${port}`
-  const appUrl = env('APP_URL') ?? defaultUrl
+  const port = env("PORT") || "3000";
+  const defaultUrl = `http://localhost:${port}`;
+  const appUrl = env("APP_URL") ?? defaultUrl;
 
   try {
-    const url = new URL(appUrl)
+    const url = new URL(appUrl);
     // Append port only if APP_URL has a port or is localhost
-    if (url.port || url.hostname === 'localhost') {
-      url.port = port
+    if (url.port || url.hostname === "localhost") {
+      url.port = port;
     }
     // Remove trailing slash from base URL
-    let baseUrl = url.toString().replace(/\/$/, '')
+    let baseUrl = url.toString().replace(/\/$/, "");
     // Append link with proper path separator
     if (link) {
       // Ensure link starts with '/' and remove duplicate slashes
-      const normalizedLink = `/${link.replace(/^\/+/, '')}`
-      return `${baseUrl}${normalizedLink}`
+      const normalizedLink = `/${link.replace(/^\/+/, "")}`;
+      return `${baseUrl}${normalizedLink}`;
     }
-    return baseUrl
+    return baseUrl;
   } catch {
     // Return default URL with link if provided
-    return link ? `${defaultUrl}/${link.replace(/^\/+/, '')}` : defaultUrl
+    return link ? `${defaultUrl}/${link.replace(/^\/+/, "")}` : defaultUrl;
   }
-}
+};
 
 export const secureOtp = (length = 6) => {
-  const digits = '0123456789'
-  let otp = ''
-  const array = new Uint8Array(length)
-  crypto.getRandomValues(array)
+  const digits = "0123456789";
+  let otp = "";
+  const array = new Uint8Array(length);
+  crypto.getRandomValues(array);
   for (let i = 0; i < length; i++) {
-    otp += digits[array[i] % 10]
+    otp += digits[array[i] % 10];
   }
-  return otp
-}
+  return otp;
+};
 
 /**
  *
@@ -191,11 +191,11 @@ export const secureOtp = (length = 6) => {
  * @param len Length of the string
  * @param suffix Suffix to add to the string
  */
-export const truncateText = (str: string, len: number = 20, suffix: string = '...'): string => {
+export const truncateText = (str: string, len: number = 20, suffix: string = "..."): string => {
   if (!str) {
-    return ''
+    return "";
   }
-  str = str.replace(/(<([^>]+)>)/gi, '')
-  const s = (str || '').length > len ? str.substring(0, len - 3) + suffix : str || ''
-  return s.replace('\n', ' ').replace(' ' + suffix, suffix.slice(1))
-}
+  str = str.replace(/(<([^>]+)>)/gi, "");
+  const s = (str || "").length > len ? str.substring(0, len - 3) + suffix : str || "";
+  return s.replace("\n", " ").replace(" " + suffix, suffix.slice(1));
+};

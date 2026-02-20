@@ -1,5 +1,5 @@
-import { Router } from 'src/core/Router'
+import { Router } from "src/core/router";
 
-Router.get('/', ({ res }) => {
-  res.send('Hello World')
-})
+Router.get("/", ({ res }) => {
+  res.send("Hello World");
+});

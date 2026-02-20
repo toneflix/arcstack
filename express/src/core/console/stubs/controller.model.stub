@@ -1,6 +1,6 @@
 import BaseController from '@controllers/BaseController';
 import { HttpContext } from 'clear-router/types/express'
-import Resource from '@core/JsonApiResource';
+import { Resource, ResourceCollection } from "resora";
 import { prisma } from '@core/DB';
 
 /**
@@ -13,19 +13,19 @@ export default class extends BaseController {
      * @param req 
      * @param res 
      */
-    index = async ({ req, res }: HttpContext) => {
-        return Resource(req, res, {
+    index = async ({ res }: HttpContext) => {
+        return new ResourceCollection({
             data: await prisma.{{ModelName}}.findMany(
                 { orderBy: { id: 'asc' } }
             ),
+        }, res)
+        .additional({
+            status: 'success',
+            message: 'OK',
+            code: 200,
         })
-            .json()
-            .status(200)
-            .additional({
-                status: 'success',
-                message: 'OK',
-                code: 200,
-            });
+        .response()
+        .setStatusCode(200);
     }
 
     /**
@@ -35,18 +35,18 @@ export default class extends BaseController {
      * @param res 
      */
     show = async ({ req, res }: HttpContext) => {
-        return Resource(req, res, {
+        return new Resource({
             data: await prisma.{{ModelName}}.findFirst(
                 { where: { id: String(req.params.id) } }
             ),
+        }, res)
+        .additional({
+            status: 'success',
+            message: 'OK',
+            code: 200,
         })
-            .json()
-            .status(200)
-            .additional({
-                status: 'success',
-                message: 'OK',
-                code: 200,
-            });
+        .response()
+        .setStatusCode(200);
     }
 
     /**
@@ -64,16 +64,16 @@ export default class extends BaseController {
             data: req.body,
         })
 
-        return Resource(req, res, {
+        return new Resource({
             data: data,
+        }, res)
+        .additional({
+            status: 'success',
+            message: 'New {{ModelName}} created successfully',
+            code: 201,
         })
-            .json()
-            .status(201)
-            .additional({
-                status: 'success',
-                message: 'New {{ModelName}} created successfully',
-                code: 201,
-            });
+        .response()
+        .setStatusCode(201);
     }
 
     /**
@@ -88,16 +88,16 @@ export default class extends BaseController {
             data: req.body(),
         })
 
-        return Resource(req, res, {
+        return new Resource({
             data,
+        }, res)
+        .additional({
+            status: 'success',
+            message: '{{ModelName}} updated successfully',
+            code: 202,
         })
-            .json()
-            .status(202)
-            .additional({
-                status: 'success',
-                message: '{{ModelName}} updated successfully',
-                code: 202,
-            });
+        .response()
+        .setStatusCode(202);
     }
 
     /**
@@ -111,15 +111,15 @@ export default class extends BaseController {
             { where: { id: String(req.params.id) } }
         )
 
-        return Resource(req, res, {
+        return new Resource({
             data: {},
+        }, res)
+        .additional({
+            status: 'success',
+            message: '{{ModelName}} deleted successfully',
+            code: 202,
         })
-            .json()
-            .status(202)
-            .additional({
-                status: 'success',
-                message: '{{ModelName}} deleted successfully',
-                code: 202,
-            });
+        .response()
+        .setStatusCode(202);
     }
 }

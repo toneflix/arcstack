@@ -1,22 +1,17 @@
-import { JsonResource, Resource } from '@core/JsonApiResource';
-
-import UserResource from './UserResource';
+import { ResourceCollection } from "resora";
+import UserResource from "./UserResource";
 
 /**
  * UserCollection
  */
-export default class extends JsonResource {
-    /**
-     * Build the response object
-     * @returns this
-     */
-    data () {
-        const data = Array.isArray(this.resource) ? this.resource : this.resource.data
+export default class extends ResourceCollection {
+  collects = UserResource;
 
-        return {
-            data: data.map(
-                (e: Resource) => new UserResource(this.event, e).data()
-            )
-        }
-    }
+  /**
+   * Build the response object
+   * @returns this
+   */
+  data() {
+    return this.toArray();
+  }
 }

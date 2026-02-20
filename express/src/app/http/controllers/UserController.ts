@@ -1,6 +1,7 @@
-import BaseController from '@controllers/BaseController'
-import { HttpContext } from 'clear-router/types/express'
-import Resource from '@core/JsonApiResource'
+import { Resource, ResourceCollection } from "resora";
+
+import BaseController from "@controllers/BaseController";
+import { HttpContext } from "clear-router/types/express";
 
 /**
  * UserController
@@ -12,91 +13,78 @@ export default class extends BaseController {
    * @param req
    * @param res
    */
-  index = async ({ req, res }: HttpContext) => {
-    return Resource(req, res, {
-      data: {},
-    })
-      .json()
-      .status(200)
+  index = async ({ res }: HttpContext) => {
+    return new ResourceCollection({ data: [] }, res)
       .additional({
-        status: 'success',
-        message: 'OK',
+        status: "success",
+        message: "OK",
         code: 200,
       })
-  }
+      .response()
+      .setStatusCode(200);
+  };
 
   /**
    * Get a specific resource
    *
-   * @param req
    * @param res
    */
-  show = async ({ req, res }: HttpContext) => {
-    return Resource(req, res, {
-      data: {},
-    })
-      .json()
-      .status(200)
+  show = async ({ res }: HttpContext) => {
+    return new Resource({ data: {} }, res)
       .additional({
-        status: 'success',
-        message: 'OK',
+        status: "success",
+        message: "OK",
         code: 200,
       })
-  }
+      .response()
+      .setStatusCode(200);
+  };
 
   /**
    * Create a resource
    *
-   * @param req
    * @param res
    */
-  create = async ({ req, res }: HttpContext) => {
-    return Resource(req, res, {
-      data: {},
-    })
-      .json()
-      .status(201)
+  create = async ({ res }: HttpContext) => {
+    return new Resource({ data: {} }, res)
       .additional({
-        status: 'success',
-        message: 'New User created successfully',
+        status: "success",
+        message: "New User created successfully",
         code: 201,
       })
-  }
+      .response()
+      .setStatusCode(201);
+  };
 
   /**
    * Update a specific resource
    *
-   * @param req
    * @param res
    */
-  update = async ({ req, res }: HttpContext) => {
-    return Resource(req, res, {
-      data: {},
-    })
-      .json()
-      .status(202)
+  update = async ({ res }: HttpContext) => {
+    return new Resource({ data: {} }, res)
       .additional({
-        status: 'success',
-        message: 'User updated successfully',
+        status: "success",
+        message: "User updated successfully",
         code: 202,
       })
-  }
+      .response()
+      .setStatusCode(202);
+  };
 
   /**
    * Delete a specific resource
    *
-   * @param req
+   * @param res
    */
-  destroy = async ({ req, res }: HttpContext) => {
-    return Resource(req, res, {
-      data: {},
-    })
-      .json()
-      .status(202)
+  destroy = async ({ res }: HttpContext) => {
+    return new Resource({ data: {} }, res)
       .additional({
-        status: 'success',
-        message: 'User deleted successfully',
+        status: "success",
+        message: "User deleted successfully",
         code: 202,
       })
-  }
+      .response()
+      .setStatusCode(202);
+  };
 }

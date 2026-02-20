@@ -1,14 +1,14 @@
-import { JsonResource } from '@core/JsonApiResource';
+import { Resource } from "resora";
 
 /**
  * UserResource
  */
-export default class extends JsonResource {
-    /**
-     * Build the response object
-     * @returns this
-     */
-    data () {
-        return this.resource
-    }
+export default class extends Resource {
+  /**
+   * Build the response object
+   * @returns this
+   */
+  data() {
+    return this.toArray();
+  }
 }

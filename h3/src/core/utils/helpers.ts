@@ -6,7 +6,7 @@ import { constructFrom, isPast } from "date-fns";
 import { Flatten } from "src/types/basic";
 import { RequestError } from "./errors";
 import jwt from "jsonwebtoken";
-import { prisma } from "src/core/DB";
+import { prisma } from "src/core/database";
 
 /**
  * Flatten an object with array values
