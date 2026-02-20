@@ -1,5 +1,7 @@
 {
+  "name": "arcstack",
   "type": "module",
+  "version": "0.1.1",
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix && oxfmt",

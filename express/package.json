@@ -2,7 +2,7 @@
   "name": "express-app",
   "description": "Simple Express.js project created with Toneflix's Node.js starter kit.",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "lint": "oxlint",
     "lint:fix": "oxlint --fix && oxfmt",
